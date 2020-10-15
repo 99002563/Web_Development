@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Employee Monitoring System</title>
+ <script src="../empdata.js"></script>
+ <script src="./jq/jquery.js"></script>
+ 
+ <script>
+    let mgr = new empManager();
+    function init(){
+    $("#div1").hide()
+     $("#div2").hide()
+     $("#div3").hide() 
+     mgr.addEmployee(new employee(101,"Nithin","Hyderabad"))
+     mgr.addEmployee(new employee(102,"Likitha","Baroda"))
+     mgr.addEmployee(new  employee(103,"Sandeep","Madhurai"))
+ }
+ 
+ function onAddClick()
+ {
+    $("#div1").hide()
+     $("#div2").hide()
+     $("#div3").show()   
+ }
+
+ function onAddEmployee(){
+    
+    let id=$("#newId").val();
+    let name=$("#newName").val();
+    let address=$("#newAddress").val();
+    let emp=new employee(id,name,address)
+    mgr.addEmployee(emp)
+   $("#newId").val("")
+    $("#newName").val("")
+    $("#newAddress").val("")
+    alert("Employee added successfully");
+ }
+ function updateRecord(){
+    let id = $("#empId").text();
+            let name = $("#empName").val();
+            let address = $("#empAddress").val();
+            let emp = new employee(id, name, address)
+            try {
+                mgr.updateEmployee(emp);
+                alert("Employee updated!!!!");                
+            } catch (error) {
+                alert(error.message);
+            }            
+ }
+ function fillRecords(){
+    $("#div1").hide()
+     $("#div2").hide()
+     $("#div3").hide()
+     let heading=`<tr><th>Emp ID</th><th>Emp Name</th><th>Emp Address</th><th>Options</th>`;
+      $("#tblRecords").html(heading);
+        $("#div1").show()
+        let data=mgr.getAll()
+        data.forEach(emp => {
+           let row = `<tr><td>${emp.empId}</td><td>${emp.empName}</td><td>${emp.empAddress}</td><td><button class="edit" sid="${emp.empId}">Edit</button>   <button class="del" sid="${emp.empId}">X</button></td>`;
+            document.getElementById("tblRecords").innerHTML+=row; 
+            $(".edit").click(function () {
+               var selectedId= $(this).attr("sid");
+               let empObj = mgr.findEmployee(selectedId);
+                    $("#empId").text(empObj.empId);
+                    $("#empName").val(empObj.empName);
+                    $("#empAddress").val(empObj.empAddress);
+                    $("#div1").hide()
+                    $("#div2").show()
+                    $("#div3").hide()
+               });
+               $(".del").click(function () {
+               var selectedId= $(this).attr("sid");
+               if(confirm("please confirm deletion of record"))
+                   {
+                       mgr.deleteEmployee(selectedId); 
+                       fillRecords();
+                   }
+                   else
+                   {
+                    $("#div1").hide()
+                    $("#div2").hide()
+                    $("#div3").hide()
+                   }
+               });
+            
+        })
+        
+    }
+  $(document).ready(init);
+</script>
+</head>
+<body>
+ <header>
+ <nav>
+    <a href="#" onclick="fillRecords()">View All</a>
+    <a href="#" onclick="onAddClick()">New Employee</a>
+    <a href="#" onclick="">About Us</a>
+ </nav>
+ </header>
+ <section>
+ <div id="div1">
+ <h2>List of Employees with Us!!!!</h2>
+ <table id="tblRecords" border="1" width="35%">
+ 
+ </table>
+ </div>
+ <div id="div2">
+ <h2>Edit the Details of the Employee</h2>
+ <p>Employee ID: <span id="empId"></span> </p>
+ <p>Employee Name: <input type="text" id="empName"></p> 
+ <p>Employee Address: <input type="text" id="empAddress"></p>
+ <p><button onclick="updateRecord()">Update Record</button></p> 
+ </div>
+ <div id="div3">
+ <h2>Add the Details of the Employee</h2>
+ <p>Employee ID: <input type="number" id="newId"> </p>
+ <p>Employee Name: <input type="text" id="newName"></p>
+ <p>Employee Address: <input type="text" id="newAddress"></p>
+ <p><button onclick="onAddEmployee()">Add Employee</button></p>
+ </div> 
+ </section>
+ 
+</body>
+</html>

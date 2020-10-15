@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        .column{
+            float:left;
+            width:33.33%;
+            padding:5px;
+        }
+        .row::after{
+            content: "";
+            clear: both;
+            display: table;
+        }
+        body{
+            background-color: rgb(220, 255, 240);
+            color:rgb(35, 175, 194);
+        }
+        nav{
+            background-color: rgb(12, 68, 65);
+            color:rgb(155, 233, 10);
+            padding: 10px;
+            margin:20px;
+            text-align: center;
+        }
+        a{
+            width:100px;
+            height:50px;
+            background-color: rgb(135, 222, 193);
+            color:darkorchid;
+        }
+        a:hover{
+            background-color: rgb(107, 104, 151);
+        }
+        h1{
+            color:rgb(30, 210, 156);
+        }
+        h2{
+            color:rgb(210, 66, 30);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="rooms.html">Rooms/Suit</a>
+            <a href="Facilities.html">Facilities</a>
+            <a href="Enquire.html">Enquiry</a>
+        </nav>
+    </header>
+    <h1>Jaipur Resort</h1>
+    <h2 style="text-decoration: underline;">Overview</h2>
+    <div class="row">
+        <div class="column">
+            <img src="img1.jpg" alt="Image of resort" style="width:100%">
+        </div>
+        <div class="column">
+            <img src="img2.jpg" alt="Image of resort" style="width:100%">
+        </div>
+        <div class="column">
+            <img src="img3.jpg" alt="Image of resort" style="width:100%">
+        </div>
+        
+    </div>
+    
+    <p>
+        Resorts in Jaipur exude grandeur. The royal splendor that the city emanates is complemented by these plush stays,
+         showered with the traditional Rajputana architecture, lustrous spreads of local and world cuisine, and spectacular landscapes..<br/>
+         Surrounded by the Aravalli Hills of Kookas, it’s a dream place for nature lovers. It’s one such resort in Jaipur, which nature enthusiasts just can’t miss.
+        It has 220 luxurious apartments and lots of facilities including a gym, two swimming pools, three restaurants, a lobby lounge and bar, a Holiday Activity Centre, a spa complex and much more. 
+        There are also plenty of activities, sights and views to enjoy during your stay at our resort.<br/> 
+    </p>
+
+    
+</body>
+</html>
